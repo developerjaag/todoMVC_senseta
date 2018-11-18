@@ -1,3 +1,19 @@
-<p>
-  todo-footer works!
-</p>
+<mat-grid-list cols="12" rowHeight="4rem">
+
+    <mat-grid-tile colspan="2" rowspan="1">
+        <p>1 tareas pendientes</p>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="8" rowspan="1">
+        <div class="example-button-row">
+            <button mat-stroked-button color="primary">Todo</button>
+            <button mat-stroked-button>Activos</button>
+            <button mat-stroked-button>Completados</button>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="2" rowspan="1">
+        <button mat-button color="warn">Borrar todos</button>
+    </mat-grid-tile>
+
+</mat-grid-list>
