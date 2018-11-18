@@ -17,6 +17,10 @@ import {MatButtonModule, MatCheckboxModule, MatListModule, MatCardModule, MatInp
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 
+// forms
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { TodoAddComponent } from './components/todo/todo-add/todo-add.component';
 import { TodoFooterComponent } from './components/todo/todo-footer/todo-footer.component';
@@ -35,6 +39,8 @@ import { FilterPipe } from './pipes/filter.pipe';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     StoreModule.forRoot( appReducers ),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

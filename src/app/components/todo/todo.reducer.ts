@@ -37,7 +37,7 @@ export function todoReducer( state = initialState, action: fromTodo.Actions ): T
         // edit todo
         case fromTodo.EDIT_TODO:
             return state.map( todoEdit => {
-                if ( todo.id === action.id ) {
+                if ( todoEdit.id === action.id ) {
                     return {
                         ...todoEdit, text: action.text
                     };

@@ -3,7 +3,7 @@ import { Todo } from '../models/todo.model';
 import * as fromFilter from '../components/todo/filter/filter.actions';
 
 @Pipe({
-  name: 'filter'
+  name: 'filterTodo'
 })
 export class FilterPipe implements PipeTransform {
 

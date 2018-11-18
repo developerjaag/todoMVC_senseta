@@ -1,10 +1,21 @@
-<mat-grid-list cols="12" rowHeight="4rem">
+<mat-grid-list cols="12" rowHeight="4rem" [ngClass]="{'backgoundItem': itemActive}" (mouseenter)="mouseHovering()" (mouseleave)="mouseLeaving()">
     <mat-grid-tile colspan="2" rowspan="1">
-        <mat-checkbox></mat-checkbox>
+        <mat-checkbox [(ngModel)]="todo.done"></mat-checkbox>
     </mat-grid-tile>
-    <mat-grid-tile colspan="10" rowspan="1">
+    <mat-grid-tile colspan="9" rowspan="1" (dblclick)="adit()">
         <mat-list-item role="listitem">
-            <span>Item 1</span>
+
+            <label *ngIf="!editing" [ngClass]="{'strikethrough': todo.done}">{{ todo.text }}</label>
+
+            <mat-form-field *ngIf="editing">
+                <input #textInputBox [formControl]="textInput" (focusout)="finishEdit()" matInput [value]="todo.text">
+            </mat-form-field>
+
         </mat-list-item>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+        <button mat-button (click)="deleteTodo()" *ngIf="itemActive && !editing">
+            <mat-icon>delete_forever</mat-icon>
+        </button>
     </mat-grid-tile>
 </mat-grid-list>

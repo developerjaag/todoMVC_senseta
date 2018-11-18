@@ -1,19 +1,19 @@
 <mat-grid-list cols="12" rowHeight="4rem">
 
     <mat-grid-tile colspan="2" rowspan="1">
-        <p>1 tareas pendientes</p>
+        <p>{{ todosPending }} tarea(s) pendiente(s)</p>
     </mat-grid-tile>
 
     <mat-grid-tile colspan="8" rowspan="1">
-        <div class="example-button-row">
-            <button mat-stroked-button color="primary">Todo</button>
-            <button mat-stroked-button>Activos</button>
-            <button mat-stroked-button>Completados</button>
+        <div class="group-button-row">
+            <button mat-stroked-button (click)="changeFilter('all')" [ngClass]="{'btn_active': currentFilter === 'all'}">Todo</button>
+            <button mat-stroked-button (click)="changeFilter('pending')" [ngClass]="{'btn_active': currentFilter === 'pending'}">Pendientes</button>
+            <button mat-stroked-button (click)="changeFilter('completed')" [ngClass]="{'btn_active': currentFilter === 'completed'}">Completados</button>
         </div>
     </mat-grid-tile>
 
     <mat-grid-tile colspan="2" rowspan="1">
-        <button mat-button color="warn">Borrar todos</button>
+        <button mat-button color="warn" (click)="deleteAllTodos()">Borrar todos</button>
     </mat-grid-tile>
 
 </mat-grid-list>

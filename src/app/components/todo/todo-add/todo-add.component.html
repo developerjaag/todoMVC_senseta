@@ -1,13 +1,14 @@
 <mat-grid-list cols="12" rowHeight="100px">
     <mat-grid-tile colspan="2" rowspan="1">
-        <button mat-button>
-            <mat-icon>keyboard_arrow_down</mat-icon>
+        <button mat-button (click)="checkAll()">
+            <mat-icon *ngIf="!doneAll" >check_box</mat-icon>
+            <mat-icon *ngIf="doneAll" >check_box_outline_blank</mat-icon>
         </button>
 
     </mat-grid-tile>
     <mat-grid-tile colspan="10" rowspan="1">
         <mat-form-field class="input-full-width">
-            <input matInput placeholder="¿Qué necesitas hacer?">
+            <input [formControl]="textInput" (keyup.enter)="addTodo()" autofocus matInput placeholder="¿Qué necesitas hacer?">
         </mat-form-field>
     </mat-grid-tile>
 </mat-grid-list>
