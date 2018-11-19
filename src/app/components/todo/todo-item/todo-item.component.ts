@@ -16,7 +16,6 @@ export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
   @ViewChild('textInputBox') textInputBox: ElementRef;
 
-  checkField: FormControl;
   textInput: FormControl;
 
   itemActive = false;
@@ -26,25 +25,24 @@ export class TodoItemComponent implements OnInit {
   constructor( private store: Store<AppState> ) { }
 
   ngOnInit() {
-    this.checkField = new FormControl( this.todo.done );
     this.textInput = new FormControl( this.todo.text, Validators.required );
-
-    this.checkField.valueChanges.subscribe( () => {
-      const action = new fromTodo.CheckTodoAction( this.todo.id );
-      this.store.dispatch( action );
-    });
-
   }// end ngOnInit
 
   // to edit text of todo
   adit() {
     this.editing = true;
-
     setTimeout( () => {
       this.textInputBox.nativeElement.select();
     }, 1);
 
   }// end edit
+
+  // change checkbox
+  checkUncheck() {
+    this.todo.done = !this.todo.done;
+    const action = new fromTodo.CheckTodoAction( this.todo.id );
+    this.store.dispatch( action );
+  }// end checkUncheck
 
   // to finish edit text of todo
   finishEdit() {

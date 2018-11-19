@@ -1,6 +1,6 @@
 <mat-grid-list cols="12" rowHeight="4rem" [ngClass]="{'backgoundItem': itemActive}" (mouseenter)="mouseHovering()" (mouseleave)="mouseLeaving()">
     <mat-grid-tile colspan="2" rowspan="1">
-        <mat-checkbox [(ngModel)]="todo.done"></mat-checkbox>
+        <mat-checkbox (change)="checkUncheck($event)" [(ngModel)]="todo.done"></mat-checkbox>
     </mat-grid-tile>
     <mat-grid-tile colspan="9" rowspan="1" (dblclick)="adit()">
         <mat-list-item role="listitem">
