@@ -1,6 +1,6 @@
 export class Todo {
 
-    public id: number;
+    public id: any;
     public text: string;
     public done: boolean;
 
@@ -8,7 +8,7 @@ export class Todo {
 
         this.text = text.charAt(0).toUpperCase() + text.slice(1);
         this.done = false;
-        this.id   = Math.random();
+        this.id   = String(Math.random());
 
     }
 }

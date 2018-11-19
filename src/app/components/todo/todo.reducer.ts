@@ -2,14 +2,7 @@ import * as fromTodo from './todo.actions';
 import { Todo } from '../../models/todo.model';
 
 
-// temporal ojo quitar
-const todo1 = new Todo('Publicar');
-const todo2 = new Todo('Leer');
-const todo3 = new Todo('Aprender');
-
-todo2.done = true;
-
-const initialState: Todo[] = [todo1, todo2, todo3];
+const initialState: Todo[] = [];
 
 export function todoReducer( state = initialState, action: fromTodo.Actions ): Todo[] {
 
