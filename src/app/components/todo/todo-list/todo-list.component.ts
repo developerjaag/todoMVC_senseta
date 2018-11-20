@@ -13,6 +13,7 @@ export class TodoListComponent implements OnInit {
 
   todos: any;
   filter: string;
+  loading: boolean;
 
   constructor( public _dataService: TodoDataService,  private store: Store<AppState> ) { }
 
@@ -25,6 +26,9 @@ export class TodoListComponent implements OnInit {
       this.todos =  state.todos.todos;
       this.filter = state.filter;
     });
+
+    // subscribe to loading state
+    this.store.select('ui').subscribe( ui => this.loading = ui.isLoading );
 
   }// end ngOnInit
 

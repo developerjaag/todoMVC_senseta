@@ -16,6 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatListModule, MatCardModule, MatInputModule, MatToolbarModule} from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 // forms
 import { ReactiveFormsModule } from '@angular/forms';
@@ -52,7 +53,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule, MatListModule, MatCardModule, MatInputModule, MatToolbarModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

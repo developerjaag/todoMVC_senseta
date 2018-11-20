@@ -10,6 +10,7 @@ import { AppState } from '../app.reducers';
 import { SetUserAction } from '../components/auth/auth.actions';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +27,6 @@ export class AuthService {
   // init lister for user data
   ionitAuthListener() {
 
-    const me = this;
     this.afAuth.authState.subscribe( (fbUser: firebase.User) => {
 
       if ( fbUser ) {
@@ -36,11 +36,9 @@ export class AuthService {
           this.store.dispatch( new SetUserAction( newUser ) );
           this.user = newUser;
         });
-        console.log('aquiiii');
       } else {
         this.user = null;
         this.userSubscription.unsubscribe();
-        console.log('Nooooo');
       }
 
     });

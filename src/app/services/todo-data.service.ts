@@ -12,6 +12,8 @@ import { AppState } from '../app.reducers';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
+import { EnableLoadignAction, DisableLoadingAction } from '../shared/ui.actions';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,6 @@ import { filter, map } from 'rxjs/operators';
 export class TodoDataService {
 
   todosListenerSubscription: Subscription = new Subscription();
-
-
 
   constructor(private afs: AngularFirestore, private _authService: AuthService, private store: Store<AppState>) { }
 
@@ -35,6 +35,8 @@ export class TodoDataService {
   // get todos
   getTodos( userUid: string) {
 
+    this.store.dispatch( new EnableLoadignAction() );
+
     const todosRef = this.afs.collection('Users/' + userUid + '/Todos');
     todosRef.snapshotChanges().pipe(
       map( docData => {
@@ -47,6 +49,7 @@ export class TodoDataService {
       })
     ).subscribe( (collection: any[]) => {
       this.store.dispatch( new SetTodosAction(collection) );
+      this.store.dispatch( new DisableLoadingAction );
     });
 
 

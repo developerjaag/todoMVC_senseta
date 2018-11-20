@@ -19,12 +19,15 @@ export class TodoAddComponent implements OnInit {
 
   textInput: FormControl;
   doneAll =  false;
+  loadingUser = true;
 
 
   constructor( private _dataService: TodoDataService, private store: Store<AppState>  ) { }
 
   ngOnInit() {
     this.textInput = new FormControl('', Validators.required);
+    // subscribe to loading state
+    this.store.select('ui').subscribe( ui => this.loadingUser = ui.isLoading );
   }
 
   // check/uncheck all
