@@ -2,11 +2,37 @@ import * as fromTodo from './todo.actions';
 import { Todo } from '../../models/todo.model';
 
 
-const initialState: Todo[] = [];
+export interface TodosState {
+    todos: Todo[];
+}
 
-export function todoReducer( state = initialState, action: fromTodo.Actions ): Todo[] {
+const initialState: TodosState = {
+    todos: []
+};
+
+export function todoReducer( state = initialState, action: fromTodo.Actions ): TodosState {
 
     switch (action.type) {
+
+        // set todos
+        case fromTodo.SET_TODOS:
+            return {
+                todos: [
+                    ...action.todos.map( todo => {
+                        return {
+                            ...todo
+                        };
+                    })
+                ]
+            };
+
+        // unset todos
+        case fromTodo.UNSET_TODOS:
+            return {
+                todos: []
+            };
+
+    /*
         // add new todo
         case fromTodo.ADD_TODO:
             const todo = new Todo(action.text);
@@ -44,6 +70,8 @@ export function todoReducer( state = initialState, action: fromTodo.Actions ): T
         // delete all todos
         case fromTodo.DELETE_ALL_TODO:
             return state.filter( todoDelete => !todoDelete.done );
+
+        */
 
         default:
             return state;

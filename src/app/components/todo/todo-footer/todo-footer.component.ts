@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.reducers';
 import { Todo } from '../../../models/todo.model';
 
+import { TodoDataService } from '../../../services/todo-data.service';
 
 @Component({
   selector: 'app-todo-footer',
@@ -19,11 +20,11 @@ export class TodoFooterComponent implements OnInit {
   validFilters: fromFilter.validFilters [] = ['all', 'completed', 'pending'];
   currentFilter: fromFilter.validFilters;
 
-  constructor(private store: Store<AppState>) { }
+  constructor( private _dataService: TodoDataService, private store: Store<AppState>) { }
 
   ngOnInit() {
     this.store.subscribe( state => {
-      this.countPending( state.todos );
+      this.countPending( state.todos.todos );
       this.currentFilter = state.filter;
     });
   }// end ngOnInit
@@ -39,10 +40,9 @@ export class TodoFooterComponent implements OnInit {
     this.todosPending = todos.filter( todo => !todo.done ).length;
   }// end countPending
 
-  // delete all todos
-  deleteAllTodos() {
-    const action = new fromTodo.DeleteAllTodoAction();
-    this.store.dispatch( action );
-  }// end deleteAllTodos
+  // delete completed todos
+  deleteCompletedTodos() {
+    this._dataService.deleteTodosCompleted();
+  }// end deleteCompletedTodos
 
 }// end class

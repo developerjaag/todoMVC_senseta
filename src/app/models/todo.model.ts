@@ -1,14 +1,13 @@
 export class Todo {
 
-    public id: any;
-    public text: string;
-    public done: boolean;
+     uid?: string;
+     text: string;
+     done: boolean;
 
-    constructor(text: string) {
+    constructor( object ) {
 
-        this.text = text.charAt(0).toUpperCase() + text.slice(1);
-        this.done = false;
-        this.id   = String(Math.random());
-
+        this.text = object &&  object.text.charAt(0).toUpperCase() + object.text.slice(1) || null;
+        this.done = object && object.done || false;
+         if ( object.uid  ) { this.uid = object.uid; }
     }
 }

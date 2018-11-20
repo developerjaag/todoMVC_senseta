@@ -4,7 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.reducers';
 
-import * as fromTodo from '../todo.actions';
+import { TodoDataService } from '../../../services/todo-data.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -22,7 +22,7 @@ export class TodoItemComponent implements OnInit {
 
   editing: boolean;
 
-  constructor( private store: Store<AppState> ) { }
+  constructor( private _dataService: TodoDataService, private store: Store<AppState> ) { }
 
   ngOnInit() {
     this.textInput = new FormControl( this.todo.text, Validators.required );
@@ -39,9 +39,8 @@ export class TodoItemComponent implements OnInit {
 
   // change checkbox
   checkUncheck() {
-    this.todo.done = !this.todo.done;
-    const action = new fromTodo.CheckTodoAction( this.todo.id );
-    this.store.dispatch( action );
+    const newTodo = new Todo(this.todo);
+    this._dataService.updateTodo(newTodo);
   }// end checkUncheck
 
   // to finish edit text of todo
@@ -51,14 +50,16 @@ export class TodoItemComponent implements OnInit {
     if ( this.textInput.invalid ) {
       return;
     }// en if
-    const action = new fromTodo.EditTodoAction(this.todo.id, this.textInput.value);
-    this.store.dispatch( action );
+
+    this.todo.text = this.textInput.value;
+    const newTodo = new Todo(this.todo);
+    this._dataService.updateTodo(newTodo);
   }// end finishEdit
 
   // delete one todo
   deleteTodo() {
-    const action = new fromTodo.DeleteTodoAction( this.todo.id );
-    this.store.dispatch( action );
+    const newTodo = new Todo(this.todo);
+    this._dataService.deleteTodo(newTodo);
   }// end deleteTodo
 
   // when cursor is inside of item

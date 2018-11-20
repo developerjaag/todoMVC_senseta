@@ -6,6 +6,9 @@ import { AppState } from '../../../app.reducers';
 
 import * as fromTodo from '../todo.actions';
 
+import { TodoDataService } from '../../../services/todo-data.service';
+import { Todo } from '../../../models/todo.model';
+
 
 @Component({
   selector: 'app-todo-add',
@@ -18,7 +21,7 @@ export class TodoAddComponent implements OnInit {
   doneAll =  false;
 
 
-  constructor(private store: Store<AppState>  ) { }
+  constructor( private _dataService: TodoDataService, private store: Store<AppState>  ) { }
 
   ngOnInit() {
     this.textInput = new FormControl('', Validators.required);
@@ -28,9 +31,8 @@ export class TodoAddComponent implements OnInit {
   checkAll() {
 
     this.doneAll = !this.doneAll;
+    this._dataService.checkAll(this.doneAll);
 
-    const action = new fromTodo.CheckAllTodoAction(this.doneAll);
-    this.store.dispatch( action );
 
   }// end checkAll
 
@@ -43,8 +45,13 @@ export class TodoAddComponent implements OnInit {
     }
 
     // new action to add a new todo on setore
+    const newTodo = new Todo({ text: this.textInput.value, done: false});
+    this._dataService.addTodo(newTodo);
+
+    /*
     const action = new fromTodo.AddTodoAction( this.textInput.value );
     this.store.dispatch( action );
+    */
 
     // clear input box
     this.textInput.setValue('');
