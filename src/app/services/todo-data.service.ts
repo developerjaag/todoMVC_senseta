@@ -38,19 +38,19 @@ export class TodoDataService {
     this.store.dispatch( new EnableLoadignAction() );
 
     const todosRef = this.afs.collection('Users/' + userUid + '/Todos');
-    todosRef.snapshotChanges().pipe(
-      map( docData => {
-          return docData.map ( doc => {
-            return {
-              uid: doc.payload.doc.id,
-              ...doc.payload.doc.data()
-            };
-          });
-      })
-    ).subscribe( (collection: any[]) => {
-      this.store.dispatch( new SetTodosAction(collection) );
-      this.store.dispatch( new DisableLoadingAction );
-    });
+   todosRef.snapshotChanges().pipe(
+        map( docData => {
+            return docData.map ( doc => {
+              return {
+                uid: doc.payload.doc.id,
+                ...doc.payload.doc.data()
+              };
+            });
+        })
+      ).subscribe( (collection: any[]) => {
+        this.store.dispatch( new SetTodosAction(collection) );
+        this.store.dispatch( new DisableLoadingAction );
+      });
 
 
   }// end getTodos

@@ -48,7 +48,7 @@ export class TodoAddComponent implements OnInit {
     }
 
     // new action to add a new todo on setore
-    const newTodo = new Todo({ text: this.textInput.value, done: false});
+    const newTodo = new Todo({ text: this.textInput.value, done: false, createAt: new Date()});
     this._dataService.addTodo(newTodo);
 
     /*

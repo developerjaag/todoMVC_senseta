@@ -1,5 +1,5 @@
 <mat-list role="list">
 
-    <app-todo-item [todo]="todo" *ngFor="let todo of todos | filterTodo: filter"></app-todo-item>
+    <app-todo-item [todo]="todo" *ngFor="let todo of todos | filterTodo: filter | orderTodos"></app-todo-item>
 
 </mat-list>
